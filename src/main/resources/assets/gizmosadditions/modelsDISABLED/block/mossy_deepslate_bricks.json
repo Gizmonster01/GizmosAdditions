@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gizmosadditions:block/mossy_deepslate_bricks"
+  }
+}

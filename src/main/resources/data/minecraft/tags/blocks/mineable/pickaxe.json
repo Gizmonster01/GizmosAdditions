@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "gizmosadditions:mossy_cobbled_deepslate",
+    "gizmosadditions:mossy_cobbled_deepslate_slab",
+    "gizmosadditions:mossy_cobbled_deepslate_stairs",
+    "gizmosadditions:mossy_cobbled_deepslate_wall",
+    "gizmosadditions:mossy_deepslate_bricks",
+    "gizmosadditions:mossy_deepslate_brick_slab",
+    "gizmosadditions:mossy_deepslate_brick_stairs",
+    "gizmosadditions:mossy_deepslate_brick_wall"
+  ]
+}

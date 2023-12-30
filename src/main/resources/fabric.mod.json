@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "gizmosadditions",
+	"version": "${version}",
+	"name": "GizmosAdditions",
+	"description": "A set of tweaks and features of my own design.",
+	"authors": [
+		"gizmonster"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/gizmosadditions/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"monster.giz.GizmosAdditions"
+		],
+		"fabric-datagen": [
+			"monster.giz.GizmosAdditionsDataGenerator"
+		]
+	},
+	"mixins": [
+		"gizmosadditions.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.3",
+		"minecraft": "~1.20.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
