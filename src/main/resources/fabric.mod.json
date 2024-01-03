@@ -19,7 +19,7 @@
 			"monster.giz.GizmosAdditions"
 		],
 		"fabric-datagen": [
-			"monster.giz.GizmosAdditionsDataGenerator"
+			"monster.giz.data.GizmosAdditionsDataGenerator"
 		]
 	},
 	"mixins": [

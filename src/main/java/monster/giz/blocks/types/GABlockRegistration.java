@@ -1,5 +1,6 @@
 package monster.giz.blocks.types;
 
+import it.unimi.dsi.fastutil.objects.ObjectAVLTreeSet;
 import monster.giz.util.GALogger;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -21,34 +22,45 @@ public class GABlockRegistration {
         return id.replace("bricks", "brick");
     }
 
-    public static Map<GABlockType, Block> registerSet(String name, Block vanillaBaseBlock, EnumSet<GABlockType> types) {
+    public static Map<GABlockType, Block> registerSet(String namespace, String name, Block vanillaBaseBlock, EnumSet<GABlockType> types) {
         GALogger.log("Attempting to register blockset: " + name);
         Map<GABlockType, Block> blockVariants = new EnumMap<>(GABlockType.class);
-        Block newBaseBlock = registerBlock(name, new Block(FabricBlockSettings.copyOf(vanillaBaseBlock)));
+        Block newBaseBlock = registerBlock(namespace, name, new Block(FabricBlockSettings.copyOf(vanillaBaseBlock)));
         blockVariants.put(GABlockType.BASE, newBaseBlock);
 
-        types.forEach(type -> blockVariants.put(type, createVariant(name, newBaseBlock, type)));
+        types.forEach(type -> blockVariants.put(type, createVariant(namespace, name, newBaseBlock, type)));
         return blockVariants;
     }
 
-    public static Block registerBlock(String name, Block base) {
+    public static Block registerBlock(String namespace, String name, Block base) {
         GALogger.log("Attempting to register: " + name);
-        Block block = Registry.register(Registries.BLOCK, new Identifier(NAMESPACE, name), base);
-        Registry.register(Registries.ITEM, new Identifier(NAMESPACE, name), new BlockItem(block, new FabricItemSettings()));
+        Block block = Registry.register(Registries.BLOCK, new Identifier(namespace, name), base);
+        Registry.register(Registries.ITEM, new Identifier(namespace, name), new BlockItem(block, new FabricItemSettings()));
         return block;
     }
 
-    private static Block createVariant(String name, Block base, GABlockType variantType) {
+    public static Block registerBlock(String namespace, String name, AbstractBlock.Settings settings) {
+        GALogger.log("Attempting to register: " + name);
+        Block block = Registry.register(Registries.BLOCK, new Identifier(namespace, name), new Block(settings));
+        Registry.register(Registries.ITEM, new Identifier(namespace, name), new BlockItem(block, new FabricItemSettings()));
+        return block;
+    }
+
+    private static Block createVariant(String namespace, String name, Block base, GABlockType variantType) {
         String variantName = fixName(name) + "_" + variantType.getName();
         switch (variantType) {
             case SLAB:
-                return registerBlock(variantName, new SlabBlock(FabricBlockSettings.copy(base)));
+                return registerBlock(namespace, variantName, new SlabBlock(FabricBlockSettings.copy(base)));
             case STAIRS:
-                return registerBlock(variantName, new StairsBlock(base.getDefaultState(), FabricBlockSettings.copy(base)));
+                return registerBlock(namespace, variantName, new StairsBlock(base.getDefaultState(), FabricBlockSettings.copy(base)));
             case WALL:
-                return registerBlock(variantName, new WallBlock(FabricBlockSettings.copy(base)));
+                return registerBlock(namespace, variantName, new WallBlock(FabricBlockSettings.copy(base)));
             case FENCE:
-                return registerBlock(variantName, new FenceBlock(FabricBlockSettings.copy(base)));
+                return registerBlock(namespace, variantName, new FenceBlock(FabricBlockSettings.copy(base)));
+                /*
+            case FENCE_GATE:
+                return registerBlock(variantName, new FenceGateBlock(FabricBlockSettings.copy(base)));
+                 */
             default:
                 throw new IllegalArgumentException("Unsupported block type: " + variantType);
         }

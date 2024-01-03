@@ -1,9 +1,8 @@
-package monster.giz.data;
+package monster.giz.data.providers;
 
 import monster.giz.blocks.GizmosAdditionsBlocks;
 import monster.giz.blocks.types.GABlockType;
 import monster.giz.util.GALogger;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
@@ -12,8 +11,8 @@ import net.minecraft.data.client.ItemModelGenerator;
 
 import java.util.Map;
 
-public class GAModelGenerator extends FabricModelProvider {
-    public GAModelGenerator(FabricDataOutput generator) {
+public class GAModelProvider extends FabricModelProvider {
+    public GAModelProvider(FabricDataOutput generator) {
         super(generator);
     }
 
@@ -21,6 +20,7 @@ public class GAModelGenerator extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         createModels(blockStateModelGenerator, GizmosAdditionsBlocks.MOSSY_COBBLED_DEEPSLATE_SET.getBlocks());
         createModels(blockStateModelGenerator, GizmosAdditionsBlocks.MOSSY_DEEPSLATE_BRICKS_SET.getBlocks());
+        createModels(blockStateModelGenerator, GizmosAdditionsBlocks.POLISHED_AMETHYST_SET.getBlocks());
     }
 
     public void createModels(BlockStateModelGenerator blockStateModelGenerator, Map<GABlockType, Block> map) {
